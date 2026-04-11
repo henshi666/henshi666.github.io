@@ -1,0 +1,35 @@
+html,
+body,
+body *,
+a,
+button,
+img,
+.card-widget,
+#page-header,
+#nav,
+#aside-content {
+  cursor: url('/img/cursor.cur'), auto !important;
+}
+
+a:hover,
+button:hover,
+img:hover,
+.card-widget:hover,
+#page-header:hover,
+#nav:hover,
+#aside-content:hover,
+a:active,
+button:active,
+img:active,
+.card-widget:active,
+#page-header:active,
+#nav:active,
+#aside-content:active {
+  cursor: url('/img/cursor.cur'), auto !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: text !important;
+}
