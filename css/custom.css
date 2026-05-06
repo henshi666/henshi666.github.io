@@ -424,17 +424,6 @@ body {
   background-attachment: fixed;
 }
 
-#page-header[style*="7d45a4381bfdfbe357a8217636659cf6.jpg"] {
-  height: 500px;
-  background-position: center center !important;
-}
-
-@media screen and (max-width: 768px) {
-  #page-header[style*="7d45a4381bfdfbe357a8217636659cf6.jpg"] {
-    height: 340px;
-  }
-}
-
 #page-header:not(.not-top-img)::before {
   background: linear-gradient(180deg, rgba(13, 20, 28, 0.34), rgba(13, 20, 28, 0.18) 42%, rgba(13, 20, 28, 0.5));
 }
