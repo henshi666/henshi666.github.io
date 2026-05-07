@@ -1,9 +1,122 @@
 (function () {
-  function initMusicPlayer () {
-    if (!window.APlayer || window.hsBlogAPlayer) return
+  const STORAGE_KEY = 'hs-blog-music-state'
+  let isPjaxNavigating = false
+  let shouldResumeAfterPjax = false
 
-    const container = document.getElementById('hs-music-player')
-    if (!container) return
+  function readState () {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
+    } catch (err) {
+      return {}
+    }
+  }
+
+  function writeState (state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        ...readState(),
+        ...state,
+        updatedAt: Date.now()
+      }))
+    } catch (err) {}
+  }
+
+  function getPlayerState () {
+    const player = window.hsBlogAPlayer
+    if (!player || !player.audio) return {}
+
+    return {
+      index: player.list ? player.list.index : 0,
+      currentTime: player.audio.currentTime || 0,
+      playing: !player.audio.paused,
+      volume: player.audio.volume
+    }
+  }
+
+  function savePlayerState (state) {
+    writeState({
+      ...getPlayerState(),
+      ...state
+    })
+  }
+
+  function getMusicContainer () {
+    let container = document.getElementById('hs-music-player')
+
+    if (!container) {
+      container = document.createElement('div')
+      container.id = 'hs-music-player'
+    }
+
+    if (container.parentElement !== document.body) {
+      document.body.appendChild(container)
+    }
+
+    return container
+  }
+
+  function restorePlayerState (resume) {
+    const player = window.hsBlogAPlayer
+    if (!player || !player.audio) return
+
+    const state = readState()
+    const stateIsFresh = state.updatedAt && Date.now() - state.updatedAt < 10 * 60 * 1000
+
+    if (typeof state.volume === 'number') {
+      player.volume(state.volume)
+    }
+
+    if (stateIsFresh && typeof state.index === 'number' && player.list && player.list.index !== state.index) {
+      player.list.switch(state.index)
+    }
+
+    if (stateIsFresh && typeof state.currentTime === 'number' && state.currentTime > 0) {
+      const seekTime = Math.max(0, state.currentTime - 0.4)
+      window.setTimeout(() => player.seek(seekTime), 120)
+    }
+
+    if (resume && state.playing) {
+      window.setTimeout(() => {
+        if (player.audio.paused) {
+          const playResult = player.play()
+          if (playResult && typeof playResult.catch === 'function') {
+            playResult.catch(() => {})
+          }
+        }
+      }, 180)
+    }
+  }
+
+  function bindPlayerEvents (player) {
+    if (player.__hsStateBound) return
+    player.__hsStateBound = true
+
+    player.on('play', () => savePlayerState({ playing: true }))
+
+    player.on('pause', () => {
+      if (!isPjaxNavigating) savePlayerState({ playing: false })
+    })
+
+    player.on('timeupdate', () => {
+      savePlayerState({ playing: !player.audio.paused })
+    })
+
+    player.on('listswitch', () => savePlayerState({
+      index: player.list.index,
+      currentTime: 0
+    }))
+  }
+
+  function initMusicPlayer () {
+    if (!window.APlayer) return
+
+    const container = getMusicContainer()
+
+    if (window.hsBlogAPlayer) {
+      restorePlayerState(shouldResumeAfterPjax)
+      shouldResumeAfterPjax = false
+      return
+    }
 
     window.hsBlogAPlayer = new APlayer({
       container,
@@ -40,6 +153,9 @@
         { name: '找自己', artist: '陶喆', url: '/music/zhao-ziji-tao-zhe.mp3', cover: '/img/headImage.jpg' }
       ]
     })
+
+    bindPlayerEvents(window.hsBlogAPlayer)
+    restorePlayerState(readState().playing)
   }
 
   if (document.readyState === 'loading') {
@@ -48,5 +164,19 @@
     initMusicPlayer()
   }
 
-  document.addEventListener('pjax:complete', initMusicPlayer)
+  document.addEventListener('pjax:send', () => {
+    shouldResumeAfterPjax = !!(window.hsBlogAPlayer && window.hsBlogAPlayer.audio && !window.hsBlogAPlayer.audio.paused)
+    isPjaxNavigating = true
+    savePlayerState({ playing: shouldResumeAfterPjax })
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    initMusicPlayer()
+    restorePlayerState(shouldResumeAfterPjax)
+    isPjaxNavigating = false
+    shouldResumeAfterPjax = false
+  })
+
+  window.addEventListener('beforeunload', () => savePlayerState())
+  window.addEventListener('pageshow', () => restorePlayerState(readState().playing))
 })()
