@@ -767,6 +767,27 @@ body {
   max-height: 280px !important;
 }
 
+#hs-music-resume {
+  position: fixed;
+  left: 18px;
+  bottom: 82px;
+  z-index: 10001;
+  display: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 15px;
+  color: #fff;
+  background: linear-gradient(135deg, #12b7f5, #18c7a2);
+  box-shadow: 0 10px 24px rgba(18, 183, 245, 0.28);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#hs-music-resume.is-show {
+  display: block;
+}
+
 .aplayer .aplayer-info .aplayer-music .aplayer-title {
   color: #1f2d3d;
 }

@@ -1,6 +1,7 @@
 (function () {
   const STORAGE_KEY = 'hs-blog-music-state'
   let isPjaxNavigating = false
+  let isRestoringPlayback = false
   let shouldResumeAfterPjax = false
 
   function readState () {
@@ -55,6 +56,68 @@
     return container
   }
 
+  function hideResumePrompt () {
+    const prompt = document.getElementById('hs-music-resume')
+    if (prompt) prompt.classList.remove('is-show')
+  }
+
+  function showResumePrompt () {
+    let prompt = document.getElementById('hs-music-resume')
+
+    if (!prompt) {
+      prompt = document.createElement('button')
+      prompt.id = 'hs-music-resume'
+      prompt.type = 'button'
+      prompt.textContent = '继续播放'
+      prompt.addEventListener('click', () => {
+        const player = window.hsBlogAPlayer
+        if (!player) return
+
+        restorePlayerState(false)
+        requestPlayback(player, true)
+      })
+      document.body.appendChild(prompt)
+    }
+
+    prompt.classList.add('is-show')
+  }
+
+  function requestPlayback (player, fromUserAction) {
+    if (!player || !player.audio) return
+
+    const fail = () => {
+      isRestoringPlayback = false
+      if (!fromUserAction) showResumePrompt()
+    }
+
+    try {
+      isRestoringPlayback = true
+      const playResult = player.play()
+
+      if (playResult && typeof playResult.then === 'function') {
+        playResult
+          .then(() => {
+            isRestoringPlayback = false
+            hideResumePrompt()
+            savePlayerState({ playing: true })
+          })
+          .catch(fail)
+      } else {
+        window.setTimeout(() => {
+          isRestoringPlayback = false
+          if (player.audio.paused) {
+            fail()
+          } else {
+            hideResumePrompt()
+            savePlayerState({ playing: true })
+          }
+        }, 250)
+      }
+    } catch (err) {
+      fail()
+    }
+  }
+
   function restorePlayerState (resume) {
     const player = window.hsBlogAPlayer
     if (!player || !player.audio) return
@@ -78,10 +141,7 @@
     if (resume && state.playing) {
       window.setTimeout(() => {
         if (player.audio.paused) {
-          const playResult = player.play()
-          if (playResult && typeof playResult.catch === 'function') {
-            playResult.catch(() => {})
-          }
+          requestPlayback(player, false)
         }
       }, 180)
     }
@@ -91,10 +151,13 @@
     if (player.__hsStateBound) return
     player.__hsStateBound = true
 
-    player.on('play', () => savePlayerState({ playing: true }))
+    player.on('play', () => {
+      hideResumePrompt()
+      savePlayerState({ playing: true })
+    })
 
     player.on('pause', () => {
-      if (!isPjaxNavigating) savePlayerState({ playing: false })
+      if (!isPjaxNavigating && !isRestoringPlayback) savePlayerState({ playing: false })
     })
 
     player.on('timeupdate', () => {
