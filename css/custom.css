@@ -712,6 +712,99 @@ body {
   color: #fff;
 }
 
+.hs-essay-page #page-header.not-home-page {
+  min-height: 22rem;
+  background-position: center center !important;
+}
+
+.hs-essay-page #page-header::before {
+  background:
+    linear-gradient(120deg, rgba(8, 14, 22, 0.68), rgba(16, 40, 54, 0.34)),
+    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.2), transparent 28%) !important;
+}
+
+.hs-essay-page #page-header #site-title {
+  display: block !important;
+  max-width: min(980px, calc(100vw - 36px));
+  margin: 0 auto;
+  color: #fff;
+  font-size: clamp(1.8rem, 5vw, 4rem);
+  line-height: 1.18;
+  letter-spacing: -0.04em;
+  overflow: visible !important;
+  white-space: normal !important;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  -webkit-line-clamp: unset !important;
+  -webkit-box-orient: unset !important;
+  text-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+}
+
+.hs-essay-page #page-site-info {
+  width: 100%;
+  padding: 0 15px;
+}
+
+.hs-essay-page #page-header #site-title span {
+  display: block;
+}
+
+.hs-essay-intro {
+  position: relative;
+  margin-bottom: 1.2rem;
+  padding: clamp(1.2rem, 4vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(238, 247, 250, 0.72)),
+    radial-gradient(circle at 8% 18%, rgba(18, 183, 245, 0.18), transparent 28%);
+  box-shadow: 0 18px 45px rgba(33, 55, 76, 0.13);
+  overflow: hidden;
+}
+
+.hs-essay-intro::after {
+  content: "";
+  position: absolute;
+  right: -48px;
+  bottom: -72px;
+  width: 190px;
+  height: 190px;
+  border: 30px solid rgba(18, 183, 245, 0.1);
+  border-radius: 999px;
+}
+
+.hs-essay-kicker {
+  margin: 0 0 0.55rem;
+  color: #1686a5;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.hs-essay-intro h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #182536;
+  font-size: clamp(1.65rem, 4vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+}
+
+.hs-essay-intro h2 span {
+  color: #0f94b8;
+}
+
+.hs-essay-intro > p:last-child {
+  position: relative;
+  z-index: 1;
+  max-width: 44rem;
+  margin: 0.85rem 0 0;
+  color: #526477;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
 #rightside > div > a,
 #rightside > div > button {
   display: flex;
@@ -829,6 +922,26 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  .hs-essay-page #page-header.not-home-page {
+    min-height: 19rem;
+  }
+
+  .hs-essay-page #page-header #site-title {
+    max-width: calc(100vw - 30px);
+    font-size: clamp(1.32rem, 6.2vw, 1.9rem);
+    line-height: 1.26;
+    letter-spacing: -0.03em;
+  }
+
+  .hs-essay-intro {
+    padding: 1.2rem;
+    border-radius: 22px;
+  }
+
+  .hs-essay-intro h2 {
+    font-size: 1.65rem;
+  }
+
   .aplayer.aplayer-fixed .aplayer-body {
     max-width: calc(100vw - 12px);
   }
