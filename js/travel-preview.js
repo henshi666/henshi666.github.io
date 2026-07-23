@@ -70,9 +70,10 @@
     const rectangle = canvas.getBoundingClientRect()
     const width = Math.max(1, Math.round(rectangle.width))
     const height = Math.max(1, Math.round(rectangle.height))
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2)
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5)
     const context = canvas.getContext('2d')
-    const bounds = getMapBounds(mapData.features)
+    const bounds = mapData.__travelWorldBounds || getMapBounds(mapData.features)
+    mapData.__travelWorldBounds = bounds
     const horizontalPadding = width * 0.055
     const verticalPadding = height * 0.12
     const scale = Math.min(
@@ -247,16 +248,18 @@
     const context = canvas.getContext('2d')
     if (!context) return false
 
-    const features = mapData.features.filter(feature => {
+    const features = mapData.__travelProvinceFeatures || mapData.features.filter(feature => {
       return feature.properties && feature.properties.level === 'province'
     })
+    mapData.__travelProvinceFeatures = features
     if (!features.length) return false
 
     const rectangle = canvas.getBoundingClientRect()
     const width = Math.max(1, Math.round(rectangle.width))
     const height = Math.max(1, Math.round(rectangle.height))
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2)
-    const bounds = getChinaMapBounds(features)
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5)
+    const bounds = mapData.__travelProvinceBounds || getChinaMapBounds(features)
+    mapData.__travelProvinceBounds = bounds
     const horizontalPadding = width * 0.065
     const verticalPadding = height * 0.065
     const scale = Math.min(

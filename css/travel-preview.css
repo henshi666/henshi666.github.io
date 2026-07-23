@@ -2670,11 +2670,11 @@ body:has(.travel-map-landing) #page {
 }
 
 .travel-map-landing > .world-atlas::before {
-  animation: travel-current-left 19s ease-in-out infinite alternate;
+  transform: rotate(8deg);
 }
 
 .travel-map-landing > .world-atlas::after {
-  animation: travel-current-right 24s ease-in-out infinite alternate;
+  transform: rotate(-7deg);
 }
 
 .travel-map-landing .world-atlas__chart {
@@ -2682,7 +2682,6 @@ body:has(.travel-map-landing) #page {
 }
 
 .travel-map-landing .world-atlas__chart::after {
-  animation: travel-tide-breathe 11s ease-in-out infinite;
   transform-origin: center;
 }
 
@@ -2906,6 +2905,22 @@ body:has(.travel-map-landing) #page {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 0.68rem;
+  }
+
+  .travel-route-ticker__track {
+    width: 100%;
+    animation: none;
+    will-change: auto;
+  }
+
+  .travel-route-ticker__viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .travel-route-ticker__group:nth-child(2),
+  .travel-route-ticker__toggle {
+    display: none;
   }
 }
 
