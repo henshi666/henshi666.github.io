@@ -1,31 +1,15 @@
 html,
-body,
-body *,
-a,
-button,
-img,
-.card-widget,
-#page-header,
-#nav,
-#aside-content {
-  cursor: url('/img/cursor.cur'), auto !important;
+body {
+  cursor: auto !important;
 }
 
-a:hover,
-button:hover,
-img:hover,
-.card-widget:hover,
-#page-header:hover,
-#nav:hover,
-#aside-content:hover,
-a:active,
-button:active,
-img:active,
-.card-widget:active,
-#page-header:active,
-#nav:active,
-#aside-content:active {
-  cursor: url('/img/cursor.cur'), auto !important;
+a,
+button,
+[role="button"],
+summary,
+select,
+label[for] {
+  cursor: pointer !important;
 }
 
 input,

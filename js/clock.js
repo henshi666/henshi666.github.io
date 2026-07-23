@@ -1,26 +1,37 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const container = document.getElementById("my-clock-widget");
-    if (!container) return;
+(function () {
+    let timer = null;
 
-    container.innerHTML = `
+    function initClock() {
+        const container = document.getElementById("my-clock-widget");
+        if (!container) {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+            }
+            return;
+        }
+
+        if (timer) clearInterval(timer);
+
+        container.innerHTML = `
         <div style="text-align:center;margin-top:10px;">
-            <div id="date" style="font-size:14px;margin-bottom:8px;"></div>
-            <div id="clock" style="display:flex;justify-content:center;gap:6px;"></div>
+            <div class="my-clock-date" style="font-size:14px;margin-bottom:8px;"></div>
+            <div class="my-clock-digits" style="display:flex;justify-content:center;gap:6px;"></div>
         </div>
     `;
 
-    const map = {
-        0: ['a','b','c','d','e','f'],
-        1: ['b','c'],
-        2: ['a','b','g','e','d'],
-        3: ['a','b','g','c','d'],
-        4: ['f','g','b','c'],
-        5: ['a','f','g','c','d'],
-        6: ['a','f','g','e','c','d'],
-        7: ['a','b','c'],
-        8: ['a','b','c','d','e','f','g'],
-        9: ['a','b','c','d','f','g']
-    };
+        const map = {
+            0: ['a','b','c','d','e','f'],
+            1: ['b','c'],
+            2: ['a','b','g','e','d'],
+            3: ['a','b','g','c','d'],
+            4: ['f','g','b','c'],
+            5: ['a','f','g','c','d'],
+            6: ['a','f','g','e','c','d'],
+            7: ['a','b','c'],
+            8: ['a','b','c','d','e','f','g'],
+            9: ['a','b','c','d','f','g']
+        };
 
     function createDigit() {
         const d = document.createElement('div');
@@ -52,8 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return d;
     }
 
-    const clock = container.querySelector("#clock");
-    let digits = [];
+        const clock = container.querySelector(".my-clock-digits");
+        let digits = [];
 
     function init() {
         for (let i = 0; i < 6; i++) {
@@ -95,10 +106,19 @@ document.addEventListener("DOMContentLoaded", function () {
             String(now.getDate()).padStart(2,'0') +
             ' ' + weekMap[now.getDay()];
 
-        container.querySelector("#date").innerText = dateStr;
+        container.querySelector(".my-clock-date").textContent = dateStr;
     }
 
     init();
-    setInterval(update, 1000);
+    timer = setInterval(update, 1000);
     update();
-});
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initClock);
+    } else {
+        initClock();
+    }
+
+    document.addEventListener("pjax:complete", initClock);
+})();

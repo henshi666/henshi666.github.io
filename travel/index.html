@@ -1,0 +1,419 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>旅行地图 | 很师's blog</title><meta name="author" content="很师"><meta name="copyright" content="很师"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="从世界地图进入走过的国家与城市旅行记录。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="旅行地图">
+<meta property="og:url" content="https://henshi666.github.io/travel/index.html">
+<meta property="og:site_name" content="很师&#39;s blog">
+<meta property="og:description" content="从世界地图进入走过的国家与城市旅行记录。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://henshi666.github.io/img/headImage.jpg">
+<meta property="article:published_time" content="2026-07-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-23T14:29:52.435Z">
+<meta property="article:author" content="很师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://henshi666.github.io/img/headImage.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://henshi666.github.io/travel/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '旅行地图',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/banner.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/headImage.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-feather-alt"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page type-travel" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">很师's blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-feather-alt"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">旅行地图</h1></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="page-title">旅行地图</div><div class="container" id="article-container">
+<link rel="stylesheet" href="/css/travel-preview.css">
+
+<div id="travel-page" class="ocean-travel travel-map-landing">
+  <section class="ocean-hero" aria-labelledby="ocean-hero-title">
+    <div class="ocean-hero__wash" aria-hidden="true"></div>
+    <div class="ocean-hero__content travel-reveal">
+      <p class="ocean-eyebrow"><span>WANDER NOTES</span><em>旅行页 · 概念预览</em></p>
+      <h1 id="ocean-hero-title">去看海，<br>也去看更远的世界。</h1>
+      <p class="ocean-hero__lead">把地图折进口袋，只带上相机和一点好奇心。这里不追赶景点，只收藏路上的风、光和那些不想忘记的瞬间。</p>
+      <a class="ocean-hero__link" href="#tide-notes">
+        <span>顺着海风往下</span>
+        <i aria-hidden="true">↓</i>
+      </a>
+    </div>
+
+    <div class="ocean-hero__coordinate travel-reveal">
+      <span>36°04′N</span>
+      <span>120°22′E</span>
+      <strong>青岛 · 海岸清晨</strong>
+    </div>
+
+    <div class="ocean-hero__tide" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </div>
+  </section>
+
+  <section class="ocean-manifesto" id="tide-notes">
+    <div class="ocean-section-mark travel-reveal">
+      <span>01</span>
+      <i></i>
+      <em>ABOUT THE JOURNEY</em>
+    </div>
+    <div class="ocean-manifesto__title travel-reveal">
+      <p>关于出发</p>
+      <h2>旅行不是抵达，<br>更像一次潮汐。</h2>
+    </div>
+    <div class="ocean-manifesto__copy travel-reveal">
+      <p>离开熟悉的岸，又带着新的自己回来。</p>
+      <p>我想把这里做成一片没有边框的海。照片负责留住光，文字负责记住当时的心情。</p>
+      <div class="ocean-stats" aria-label="旅行记录概览">
+        <span><strong>04</strong> 次出发</span>
+        <span><strong>04</strong> 座城市</span>
+        <span><strong>37</strong> 段瞬间</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="world-atlas" aria-labelledby="world-atlas-title">
+    <div class="world-atlas__heading travel-reveal">
+      <div>
+        <p class="ocean-kicker">MY TRAVEL ATLAS</p>
+        <h1 id="world-atlas-title">世界地图</h1>
+      </div>
+      <p>这里是旅行记录的入口。点击地图上发光的国家，进入这个国家的城市地图与旅行手记。</p>
+    </div>
+
+    <div
+      class="travel-route-ticker travel-reveal"
+      role="group"
+      aria-label="航海日志：已到访哈尔滨、长春、沈阳、大连、石家庄、唐山、青岛、北京、天津、洛阳、郑州、大理、丽江、昆明，共十四座城市">
+      <div class="travel-route-ticker__label">
+        <span aria-hidden="true">航海日志</span>
+        <em aria-hidden="true"><strong data-travel-count="14">14</strong> CITIES</em>
+        <button
+          class="travel-route-ticker__toggle"
+          type="button"
+          data-route-ticker-toggle
+          aria-pressed="false"
+          aria-label="暂停城市航海日志滚动">
+          <span data-route-ticker-toggle-label>暂停</span>
+        </button>
+      </div>
+      <div class="travel-route-ticker__viewport" aria-hidden="true">
+        <div class="travel-route-ticker__track">
+          <span class="travel-route-ticker__group">哈尔滨 <i>→</i> 长春 <i>→</i> 沈阳 <i>→</i> 大连 <i>→</i> 石家庄 <i>→</i> 唐山 <i>→</i> 青岛 <i>→</i> 北京 <i>→</i> 天津 <i>→</i> 洛阳 <i>→</i> 郑州 <i>→</i> 大理 <i>→</i> 丽江 <i>→</i> 昆明 <i>→</i></span>
+          <span class="travel-route-ticker__group">哈尔滨 <i>→</i> 长春 <i>→</i> 沈阳 <i>→</i> 大连 <i>→</i> 石家庄 <i>→</i> 唐山 <i>→</i> 青岛 <i>→</i> 北京 <i>→</i> 天津 <i>→</i> 洛阳 <i>→</i> 郑州 <i>→</i> 大理 <i>→</i> 丽江 <i>→</i> 昆明 <i>→</i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="world-atlas__shell travel-reveal" data-world-map-root>
+      <div class="world-atlas__chart">
+        <canvas id="travel-world-map" role="img" aria-label="世界旅行足迹地图，目前点亮中国"></canvas>
+        <div class="world-atlas__grid" aria-hidden="true"></div>
+        <span class="world-atlas__longitude world-atlas__longitude--west" aria-hidden="true">120° W</span>
+        <span class="world-atlas__longitude world-atlas__longitude--east" aria-hidden="true">120° E</span>
+
+        <a
+          class="world-marker world-marker--china"
+          href="/travel/cn/"
+          data-map-lon="104.2"
+          data-map-lat="35.9"
+          aria-label="中国，14座城市，进入中国旅行记录">
+          <span class="world-marker__pulse" aria-hidden="true"><i></i></span>
+          <span class="world-marker__card">
+            <small>CHINA · 已抵达</small>
+            <strong>中国</strong>
+            <em>14 座城市 · 位置已预留</em>
+            <b>进入旅行记录 <i aria-hidden="true">→</i></b>
+          </span>
+        </a>
+
+        <p class="world-atlas__loading" data-map-status>海岸线正在浮现…</p>
+      </div>
+
+      <aside class="world-atlas__panel" aria-label="已到访国家列表">
+        <div class="world-atlas__panel-head" aria-label="已抵达一个国家">
+          <span aria-hidden="true">已抵达</span>
+          <strong aria-hidden="true" data-travel-count="1" data-travel-count-pad="2">01</strong>
+          <em aria-hidden="true">COUNTRY</em>
+        </div>
+        <div class="world-atlas__metrics" role="group" aria-label="旅行足迹：十四座城市，十四个坐标">
+          <span><strong aria-hidden="true" data-travel-count="14">14</strong><em aria-hidden="true">城市</em></span>
+          <span><strong aria-hidden="true" data-travel-count="14">14</strong><em aria-hidden="true">坐标</em></span>
+        </div>
+        <a class="world-country-link" href="/travel/cn/">
+          <span class="world-country-link__index">01</span>
+          <span>
+            <strong>中国</strong>
+            <em>哈尔滨 · 长春 · 沈阳 · 大连 · 石家庄 · 唐山 · 青岛 · 北京 · 天津 · 洛阳 · 郑州 · 大理 · 丽江 · 昆明</em>
+          </span>
+          <i aria-hidden="true">↗</i>
+        </a>
+        <p>点击中国进入城市地图。以后去到新的国家，这里会继续增加新的发光坐标。</p>
+        <small>Map data · Natural Earth</small>
+      </aside>
+    </div>
+
+    <p class="world-atlas__future travel-reveal">目前点亮中国。下一次出发，会让世界地图多亮一处。</p>
+  </section>
+
+  <section class="ocean-stories" aria-labelledby="ocean-stories-title">
+    <div class="ocean-section-mark travel-reveal">
+      <span>02</span>
+      <i></i>
+      <em>LIGHTS ALONG THE WAY</em>
+    </div>
+    <div class="ocean-stories__heading travel-reveal">
+      <div>
+        <p class="ocean-kicker">TRAVEL STORIES</p>
+        <h2 id="ocean-stories-title">沿途拾光</h2>
+      </div>
+      <p>不按攻略排序，只按记忆浮上来的顺序。</p>
+    </div>
+
+    <div class="ocean-stories__mosaic">
+      <article class="ocean-story ocean-story--qingdao travel-reveal" id="story-qingdao">
+        <div class="ocean-shot ocean-shot--qingdao" role="img" aria-label="青岛海边木栈道与城市海岸"></div>
+        <div class="ocean-story__shade"></div>
+        <div class="ocean-story__number">01</div>
+        <div class="ocean-story__content">
+          <p>2026.05.02 · 4 DAYS</p>
+          <h3>海风把时间<br>吹慢了</h3>
+          <span>青岛 · 山东</span>
+          <blockquote>凌晨五点的海边没有观众，浪还是一遍遍认真地抵达岸边。</blockquote>
+          <a href="#featured-note">读这段手记 <i aria-hidden="true">→</i></a>
+        </div>
+      </article>
+
+      <article class="ocean-story ocean-story--quanzhou travel-reveal" id="story-quanzhou">
+        <div class="ocean-shot ocean-shot--quanzhou" role="img" aria-label="泉州雨后的灯笼旧巷"></div>
+        <div class="ocean-story__shade"></div>
+        <div class="ocean-story__content">
+          <p>2026.03.16 · 3 DAYS</p>
+          <h3>雨落在旧巷的<br>灯笼上</h3>
+          <span>泉州 · 福建</span>
+        </div>
+      </article>
+
+      <article class="ocean-story ocean-story--hangzhou travel-reveal" id="story-hangzhou">
+        <div class="ocean-shot ocean-shot--hangzhou" role="img" aria-label="杭州春日晨雾中的茶山"></div>
+        <div class="ocean-story__shade"></div>
+        <div class="ocean-story__content">
+          <p>2025.04.08 · 2 DAYS</p>
+          <h3>茶山醒得比<br>城市更早</h3>
+          <span>杭州 · 浙江</span>
+        </div>
+      </article>
+
+      <article class="ocean-story ocean-story--dali travel-reveal" id="story-dali">
+        <div class="ocean-shot ocean-shot--dali" role="img" aria-label="大理洱海边的山影、晚霞与自行车"></div>
+        <div class="ocean-story__shade"></div>
+        <div class="ocean-story__content">
+          <p>2025.10.03 · 5 DAYS</p>
+          <h3>在洱海边，<br>把黄昏骑完</h3>
+          <span>大理 · 云南</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="ocean-featured-note travel-reveal" id="featured-note">
+    <div class="ocean-featured-note__meta">
+      <span>QINGDAO, 05:17 AM</span>
+      <strong>海边手记 · 01</strong>
+    </div>
+    <div class="ocean-featured-note__body">
+      <p>天刚有一点亮，我沿着海岸一直走。没有目的地，也没有一定要拍到的画面。</p>
+      <p>远处的城市还没完全醒来，路上偶尔有人跑过。那一刻忽然觉得，自由不是要去多远，而是可以暂时不回答任何问题。</p>
+      <span>—— 写在海风最轻的时候</span>
+    </div>
+  </section>
+
+  <section class="ocean-ending travel-reveal">
+    <p class="ocean-kicker">TO THE NEXT HORIZON</p>
+    <h2>愿每一次出发，<br>都不是为了逃离生活，<br><span>而是为了更自由地回来。</span></h2>
+    <div class="ocean-ending__next">
+      <span>下一站</span>
+      <strong>还没有决定</strong>
+      <em>让风替我选。</em>
+    </div>
+  </section>
+
+  <p class="ocean-preview-note">以上地点、日期与文字为页面效果示例，之后可以替换成你的真实旅途。</p>
+</div>
+
+<script src="/js/travel-preview.js"></script>
+</div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 很师</span></div><div class="footer_custom_text">路漫漫其修远兮，吾将上下而求索</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="/js/clock.js"></script><script src="/js/essays.js?v=20260517"></script><div id="hs-music-player"></div><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="/js/music-player.js?v=20260507-refresh-resume"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
