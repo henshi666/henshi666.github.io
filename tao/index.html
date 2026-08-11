@@ -1,0 +1,623 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>道德经 | 很师's blog</title><meta name="author" content="很师"><meta name="copyright" content="很师"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="每日学习《道德经》的阅读、理解与生活实践记录。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="道德经">
+<meta property="og:url" content="https://henshi666.github.io/tao/index.html">
+<meta property="og:site_name" content="很师&#39;s blog">
+<meta property="og:description" content="每日学习《道德经》的阅读、理解与生活实践记录。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://henshi666.github.io/img/headImage.jpg">
+<meta property="article:author" content="很师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://henshi666.github.io/img/headImage.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://henshi666.github.io/tao/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '道德经',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/banner.webp);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/headImage.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-feather-alt"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tao/"><i class="fa-fw fas fa-yin-yang"></i><span> 道德经</span></a></div><div class="menus_item"><a class="site-page" href="/travel/"><i class="fa-fw fas fa-map-marked-alt"></i><span> 旅行</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page type-tao" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">很师's blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-feather-alt"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tao/"><i class="fa-fw fas fa-yin-yang"></i><span> 道德经</span></a></div><div class="menus_item"><a class="site-page" href="/travel/"><i class="fa-fw fas fa-map-marked-alt"></i><span> 旅行</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">道德经</h1></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="page-title">道德经</div><div class="container" id="article-container">
+<link rel="stylesheet" href="/css/tao.css">
+<div class="tao-page" data-tao-column>
+  <section class="tao-hero" aria-labelledby="tao-title">
+    <div class="tao-hero__rail" aria-hidden="true">
+      <span>DAODEJING</span>
+      <i></i>
+      <span>每日所学</span>
+    </div>
+
+    <div class="tao-hero__copy tao-reveal">
+      <p class="tao-kicker">一日一章 · 一念一省</p>
+      <h1 id="tao-title"><span>道</span><span>德</span><span>经</span></h1>
+      <blockquote>道可道，非常道。<br>名可名，非常名。</blockquote>
+      <p class="tao-intro">不求急着读懂，只把每一次停留、疑问与领会认真写下。八十一章，是一条慢慢走近自己的路。</p>
+      <a class="tao-primary-link" href="/2026/08/12/tao-01/">
+        <span>继续今日所学</span>
+        <b aria-hidden="true">↘</b>
+      </a>
+    </div>
+
+    <div class="tao-hero__progress tao-reveal" style="--tao-progress: 1.2%">
+      <div class="tao-progress-ring" aria-label="已学习 1 章，共 81 章">
+        <div>
+          <strong>01</strong>
+          <span>/ 81</span>
+        </div>
+      </div>
+      <p><span>已行</span><strong>1.2%</strong></p>
+      <small>1 篇学习记录</small>
+    </div>
+
+    <div class="tao-hero__seal" aria-hidden="true"><span>道</span><i>日日自省</i></div>
+    <div class="tao-hero__circle" aria-hidden="true"></div>
+  </section>
+
+  <section class="tao-section tao-catalogue" aria-labelledby="tao-catalogue-title">
+    <header class="tao-section-heading tao-reveal">
+      <div>
+        <p class="tao-kicker">THE EIGHTY-ONE</p>
+        <h2 id="tao-catalogue-title">八十一章</h2>
+      </div>
+      <p>点亮一章，不是完成一次阅读，而是留下了一次与经典相遇的证据。</p>
+    </header>
+
+    <div class="tao-volumes">
+      
+    <section class="tao-volume tao-reveal" aria-labelledby="tao-volume-1">
+      <header>
+        <div>
+          <p>天地之始</p>
+          <h3 id="tao-volume-1">道经</h3>
+        </div>
+        <span>01—37</span>
+      </header>
+      <div class="tao-chapter-grid">
+        <a class="tao-chapter is-complete" href="/2026/08/12/tao-01/" aria-label="第 1 章，已学习，打开最新记录">
+          <span>01</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <span class="tao-chapter" aria-label="第 2 章，尚未学习">
+          <span>02</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 3 章，尚未学习">
+          <span>03</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 4 章，尚未学习">
+          <span>04</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 5 章，尚未学习">
+          <span>05</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 6 章，尚未学习">
+          <span>06</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 7 章，尚未学习">
+          <span>07</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 8 章，尚未学习">
+          <span>08</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 9 章，尚未学习">
+          <span>09</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 10 章，尚未学习">
+          <span>10</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 11 章，尚未学习">
+          <span>11</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 12 章，尚未学习">
+          <span>12</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 13 章，尚未学习">
+          <span>13</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 14 章，尚未学习">
+          <span>14</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 15 章，尚未学习">
+          <span>15</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 16 章，尚未学习">
+          <span>16</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 17 章，尚未学习">
+          <span>17</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 18 章，尚未学习">
+          <span>18</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 19 章，尚未学习">
+          <span>19</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 20 章，尚未学习">
+          <span>20</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 21 章，尚未学习">
+          <span>21</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 22 章，尚未学习">
+          <span>22</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 23 章，尚未学习">
+          <span>23</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 24 章，尚未学习">
+          <span>24</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 25 章，尚未学习">
+          <span>25</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 26 章，尚未学习">
+          <span>26</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 27 章，尚未学习">
+          <span>27</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 28 章，尚未学习">
+          <span>28</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 29 章，尚未学习">
+          <span>29</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 30 章，尚未学习">
+          <span>30</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 31 章，尚未学习">
+          <span>31</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 32 章，尚未学习">
+          <span>32</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 33 章，尚未学习">
+          <span>33</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 34 章，尚未学习">
+          <span>34</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 35 章，尚未学习">
+          <span>35</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 36 章，尚未学习">
+          <span>36</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 37 章，尚未学习">
+          <span>37</span>
+          <i aria-hidden="true"></i>
+        </span></div>
+    </section>
+      
+    <section class="tao-volume tao-reveal" aria-labelledby="tao-volume-38">
+      <header>
+        <div>
+          <p>万物之德</p>
+          <h3 id="tao-volume-38">德经</h3>
+        </div>
+        <span>38—81</span>
+      </header>
+      <div class="tao-chapter-grid">
+        <span class="tao-chapter" aria-label="第 38 章，尚未学习">
+          <span>38</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 39 章，尚未学习">
+          <span>39</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 40 章，尚未学习">
+          <span>40</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 41 章，尚未学习">
+          <span>41</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 42 章，尚未学习">
+          <span>42</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 43 章，尚未学习">
+          <span>43</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 44 章，尚未学习">
+          <span>44</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 45 章，尚未学习">
+          <span>45</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 46 章，尚未学习">
+          <span>46</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 47 章，尚未学习">
+          <span>47</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 48 章，尚未学习">
+          <span>48</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 49 章，尚未学习">
+          <span>49</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 50 章，尚未学习">
+          <span>50</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 51 章，尚未学习">
+          <span>51</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 52 章，尚未学习">
+          <span>52</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 53 章，尚未学习">
+          <span>53</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 54 章，尚未学习">
+          <span>54</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 55 章，尚未学习">
+          <span>55</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 56 章，尚未学习">
+          <span>56</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 57 章，尚未学习">
+          <span>57</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 58 章，尚未学习">
+          <span>58</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 59 章，尚未学习">
+          <span>59</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 60 章，尚未学习">
+          <span>60</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 61 章，尚未学习">
+          <span>61</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 62 章，尚未学习">
+          <span>62</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 63 章，尚未学习">
+          <span>63</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 64 章，尚未学习">
+          <span>64</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 65 章，尚未学习">
+          <span>65</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 66 章，尚未学习">
+          <span>66</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 67 章，尚未学习">
+          <span>67</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 68 章，尚未学习">
+          <span>68</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 69 章，尚未学习">
+          <span>69</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 70 章，尚未学习">
+          <span>70</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 71 章，尚未学习">
+          <span>71</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 72 章，尚未学习">
+          <span>72</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 73 章，尚未学习">
+          <span>73</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 74 章，尚未学习">
+          <span>74</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 75 章，尚未学习">
+          <span>75</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 76 章，尚未学习">
+          <span>76</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 77 章，尚未学习">
+          <span>77</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 78 章，尚未学习">
+          <span>78</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 79 章，尚未学习">
+          <span>79</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 80 章，尚未学习">
+          <span>80</span>
+          <i aria-hidden="true"></i>
+        </span>
+        <span class="tao-chapter" aria-label="第 81 章，尚未学习">
+          <span>81</span>
+          <i aria-hidden="true"></i>
+        </span></div>
+    </section>
+    </div>
+  </section>
+
+  <section class="tao-section tao-journal" id="tao-journal" aria-labelledby="tao-journal-title">
+    <header class="tao-section-heading tao-reveal">
+      <div>
+        <p class="tao-kicker">DAILY NOTES</p>
+        <h2 id="tao-journal-title">每日所学</h2>
+      </div>
+      <p>原文、理解、所得与实践，都按当天真实的样子留下。</p>
+    </header>
+    <div class="tao-entry-grid">
+    <article class="tao-entry tao-reveal is-latest">
+      <a href="/2026/08/12/tao-01/">
+        <div class="tao-entry__meta">
+          <span>2026.08.12</span>
+          <i aria-hidden="true"></i>
+          <span>第 01 章</span>
+        </div>
+        <h3>第一章｜道可道，非常道</h3>
+        <p>从“道可道，非常道”开始，留下阅读《道德经》的第一日笔记。</p>
+        <span class="tao-entry__read">展开此日所学 <b aria-hidden="true">→</b></span>
+      </a>
+    </article></div>
+  </section>
+
+  <footer class="tao-colophon tao-reveal">
+    <span>知者不言</span>
+    <i aria-hidden="true"></i>
+    <span>言者不知</span>
+    <small>读之 · 思之 · 行之</small>
+  </footer>
+</div>
+<script src="/js/tao.js"></script></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 很师</span></div><div class="footer_custom_text">路漫漫其修远兮，吾将上下而求索</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="/js/clock.js"></script><script src="/js/essays.js?v=20260517"></script><div id="hs-music-player"></div><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="/js/music-player.js?v=20260507-refresh-resume"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
