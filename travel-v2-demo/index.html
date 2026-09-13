@@ -1,0 +1,481 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>一路所见 · 旅行手记 V2 | 很师's blog</title><meta name="author" content="很师"><meta name="copyright" content="很师"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一页式旅行地图与青岛手记视觉预览。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="一路所见 · 旅行手记 V2">
+<meta property="og:url" content="https://henshi666.github.io/travel-v2-demo/index.html">
+<meta property="og:site_name" content="很师&#39;s blog">
+<meta property="og:description" content="一页式旅行地图与青岛手记视觉预览。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://henshi666.github.io/img/headImage.jpg">
+<meta property="article:published_time" content="2026-08-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-12T17:15:29.287Z">
+<meta property="article:author" content="很师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://henshi666.github.io/img/headImage.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://henshi666.github.io/travel-v2-demo/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '一路所见 · 旅行手记 V2',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/css/home-pet.css?v=20260913-1"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/banner.webp);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/headImage.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-feather-alt"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tao/"><i class="fa-fw fas fa-yin-yang"></i><span> 道德经</span></a></div><div class="menus_item"><a class="site-page" href="/travel/"><i class="fa-fw fas fa-map-marked-alt"></i><span> 旅行</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page type-travel-v2-demo" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">很师's blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-feather-alt"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tao/"><i class="fa-fw fas fa-yin-yang"></i><span> 道德经</span></a></div><div class="menus_item"><a class="site-page" href="/travel/"><i class="fa-fw fas fa-map-marked-alt"></i><span> 旅行</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">一路所见 · 旅行手记 V2</h1></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="page-title">一路所见 · 旅行手记 V2</div><div class="container" id="article-container">
+<link rel="stylesheet" href="/css/travel-v2-demo.css?v=20260813">
+
+<article id="travel-v2-demo" class="tv2-shell" data-active-scene="1" data-active-route="northeast">
+  <a class="tv2-skip" href="#world">跳到世界地图</a>
+
+  <nav class="tv2-progress" aria-label="旅行页面章节">
+    <a href="#cover" data-tv2-nav="1" aria-label="第 1 章：一路所见" aria-current="true">
+      <span>01</span><i aria-hidden="true"></i><em>启程</em>
+    </a>
+    <a href="#world" data-tv2-nav="2" aria-label="第 2 章：世界地图">
+      <span>02</span><i aria-hidden="true"></i><em>世界</em>
+    </a>
+    <a href="#china-routes" data-tv2-nav="3" aria-label="第 3 章：中国路线">
+      <span>03</span><i aria-hidden="true"></i><em>中国</em>
+    </a>
+    <a href="#qingdao" data-tv2-nav="4" aria-label="第 4 章：青岛手记">
+      <span>04</span><i aria-hidden="true"></i><em>青岛</em>
+    </a>
+    <a href="#next" data-tv2-nav="5" aria-label="第 5 章：下一站">
+      <span>05</span><i aria-hidden="true"></i><em>未定</em>
+    </a>
+  </nav>
+
+  <section id="cover" class="tv2-scene tv2-hero" data-tv2-scene="1" aria-labelledby="tv2-cover-title">
+    <img
+      class="tv2-hero__art"
+      src="/img/travel-v2/qingdao-rocks-sketch.webp"
+      width="1869"
+      height="842"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      alt="青岛礁石海岸的海蓝钢笔淡彩简笔画"
+    >
+    <div class="tv2-hero__wash" aria-hidden="true"></div>
+    <div class="tv2-hero__orbit tv2-hero__orbit--one" aria-hidden="true"></div>
+    <div class="tv2-hero__orbit tv2-hero__orbit--two" aria-hidden="true"></div>
+
+    <div class="tv2-wrap tv2-hero__inner">
+      <div class="tv2-hero__copy">
+        <p class="tv2-kicker" data-tv2-reveal>TRAVEL NOTES · V2 DEMO</p>
+        <h1 id="tv2-cover-title" data-tv2-reveal>
+          <span>一路</span>
+          <span>所见</span>
+        </h1>
+        <p class="tv2-hero__lead" data-tv2-reveal>
+          把地图当作目录，把每一段路写成一页。<br>
+          从世界落到中国，再从一座城走进一阵海风。
+        </p>
+      </div>
+
+      <div class="tv2-hero__footer">
+        <div class="tv2-stats" aria-label="旅行统计：1 个国家，14 座城市，9 个省区">
+          <span><strong>01</strong><em>国家</em></span>
+          <i aria-hidden="true"></i>
+          <span><strong>14</strong><em>城市</em></span>
+          <i aria-hidden="true"></i>
+          <span><strong>09</strong><em>省区</em></span>
+        </div>
+        <a class="tv2-scroll-cue" href="#world">
+          <span>沿地图向下</span>
+          <svg viewBox="0 0 28 44" aria-hidden="true">
+            <path d="M14 2v36M6 30l8 8 8-8"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="tv2-hero__caption" data-tv2-reveal>QINGDAO · 礁石与潮汐 / 01</p>
+  </section>
+
+  <section id="world" class="tv2-scene tv2-world" data-tv2-scene="2" data-snap aria-labelledby="tv2-world-title">
+    <div class="tv2-world__grain" aria-hidden="true"></div>
+    <div class="tv2-wrap tv2-world__inner">
+      <header class="tv2-section-heading tv2-section-heading--light" data-tv2-reveal>
+        <p class="tv2-kicker">WHERE I'VE BEEN · 02</p>
+        <span>104°E / 35°N</span>
+      </header>
+
+      <div class="tv2-world__grid">
+        <div class="tv2-world-map" data-world-map-root data-tv2-reveal aria-busy="false">
+          <div class="tv2-world-map__latitudes" aria-hidden="true"></div>
+          <canvas id="tv2-world-canvas" role="img" aria-label="世界陆地轮廓地图，中国位置被标记"></canvas>
+          <a
+            class="tv2-world-marker"
+            href="#china-routes"
+            data-map-lon="104.1954"
+            data-map-lat="35.8617"
+            aria-label="进入中国旅行路线"
+          >
+            <i aria-hidden="true"></i>
+            <span>中国<small>CHINA · 01</small></span>
+          </a>
+          <p class="tv2-map-status" data-world-map-status aria-live="polite">地图脚本载入后将在这里展开。</p>
+          <noscript>
+            <p class="tv2-noscript">交互地图需要 JavaScript；你仍可<a href="/travel/cn/">直接进入中国旅行记录</a>。</p>
+          </noscript>
+        </div>
+
+        <div class="tv2-world__copy" data-tv2-reveal>
+          <p class="tv2-scene-number" aria-hidden="true">02</p>
+          <h2 id="tv2-world-title">从世界，<br>落到中国</h2>
+          <p>地图上的光点不必很多。每亮起一个，就留下当时的天气、声音和心情。</p>
+          <a class="tv2-country-link" href="#china-routes">
+            <span><strong>01</strong> 已抵达国家</span>
+            <b>中国</b>
+            <em>14 座城市 <i aria-hidden="true">↘</i></em>
+          </a>
+          <p class="tv2-city-ribbon" aria-label="已经到访的城市">
+            哈尔滨 · 长春 · 沈阳 · 大连 · 北京 · 天津 · 唐山 · 石家庄 · 青岛 · 郑州 · 洛阳 · 昆明 · 大理 · 丽江
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="china-routes" class="tv2-scene tv2-china" data-tv2-scene="3" data-snap aria-labelledby="tv2-china-title">
+    <div class="tv2-china__wordmark" aria-hidden="true">CHINA</div>
+    <div class="tv2-wrap tv2-china__inner">
+      <div class="tv2-china__visual" data-tv2-reveal>
+        <header class="tv2-section-heading">
+          <p class="tv2-kicker">ROUTES · 03</p>
+          <span>14 CITIES / 04 ROUTES</span>
+        </header>
+        <h2 id="tv2-china-title">十四座城，<br>四段路</h2>
+        <p class="tv2-china__intro">把中国地图折成四页。掠过东北的风，沿着京津冀转弯，在海岸和中原停顿，最后去云南看云。</p>
+
+        <div class="tv2-china-map" data-china-map-root aria-busy="false">
+          <canvas id="tv2-china-canvas" role="img" aria-label="标出十四座到访城市的中国地图"></canvas>
+          <div class="tv2-china-map__markers" data-china-marker-layer aria-hidden="true"></div>
+          <p class="tv2-map-status" data-china-map-status aria-live="polite">地图脚本载入后将在这里标记十四座城市。</p>
+          <noscript>
+            <p class="tv2-noscript">中国地图需要 JavaScript；右侧四组城市清单仍可直接阅读。</p>
+          </noscript>
+        </div>
+      </div>
+
+      <ul class="tv2-route-index" aria-label="中国旅行路线分组">
+        <li class="tv2-route-row is-active" data-route="northeast" data-tv2-reveal>
+          <button type="button" data-route-control aria-pressed="true">
+            <span class="tv2-route-row__index">01</span>
+            <span class="tv2-route-row__name">东北</span>
+            <span class="tv2-route-row__count">04</span>
+            <span class="tv2-route-row__cities">哈尔滨 / 长春 / 沈阳 / 大连</span>
+          </button>
+        </li>
+
+        <li class="tv2-route-row" data-route="north" data-tv2-reveal>
+          <button type="button" data-route-control aria-pressed="false">
+            <span class="tv2-route-row__index">02</span>
+            <span class="tv2-route-row__name">京津冀</span>
+            <span class="tv2-route-row__count">04</span>
+            <span class="tv2-route-row__cities">北京 / 天津 / 唐山 / 石家庄</span>
+          </button>
+        </li>
+
+        <li class="tv2-route-row" data-route="coast" data-tv2-reveal>
+          <button type="button" data-route-control aria-pressed="false">
+            <span class="tv2-route-row__index">03</span>
+            <span class="tv2-route-row__name">海岸·中原</span>
+            <span class="tv2-route-row__count">03</span>
+            <span class="tv2-route-row__cities">青岛 / 郑州 / 洛阳</span>
+          </button>
+          <a class="tv2-route-row__story" href="#qingdao">展开青岛手记 <span aria-hidden="true">→</span></a>
+        </li>
+
+        <li class="tv2-route-row" data-route="yunnan" data-tv2-reveal>
+          <button type="button" data-route-control aria-pressed="false">
+            <span class="tv2-route-row__index">04</span>
+            <span class="tv2-route-row__name">云南</span>
+            <span class="tv2-route-row__count">03</span>
+            <span class="tv2-route-row__cities">昆明 / 大理 / 丽江</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="tv2-qingdao" aria-label="青岛旅行手记">
+    <article id="qingdao" class="tv2-scene tv2-qingdao-chapter tv2-qingdao-chapter--arrival" data-tv2-scene="4" data-snap aria-labelledby="tv2-qingdao-arrival-title">
+      <div class="tv2-wrap tv2-qingdao-chapter__grid">
+        <div class="tv2-qingdao-copy" data-tv2-reveal>
+          <p class="tv2-kicker">QINGDAO · 04 / 01</p>
+          <p class="tv2-qingdao-copy__time">APRIL · CITY WALK</p>
+          <h2 id="tv2-qingdao-arrival-title"><span class="tv2-nowrap">先从一栋楼，</span><br>认出青岛</h2>
+          <p>树梢后面露出“青岛啤酒”四个字，城市忽然有了名字。旅行有时就是这样——并不需要宏大的开场，一个熟悉的招牌，就足够把人带进故事。</p>
+          <div class="tv2-note-line">
+            <span>抵达</span><i aria-hidden="true"></i><em>城市的第一眼</em>
+          </div>
+        </div>
+
+        <figure class="tv2-sketch tv2-sketch--portrait" data-tv2-reveal>
+          <img
+            src="/img/travel-v2/qingdao-beer-sketch.webp"
+            width="841"
+            height="1870"
+            loading="lazy"
+            decoding="async"
+            alt="由青岛啤酒大楼实拍照片转换成的海蓝钢笔淡彩简笔画"
+          >
+          <figcaption><span>01</span> 城市 / 青岛啤酒大楼</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="tv2-scene tv2-qingdao-chapter tv2-qingdao-chapter--rocks" data-tv2-scene="4" data-snap aria-labelledby="tv2-qingdao-rocks-title">
+      <div class="tv2-wrap tv2-qingdao-rocks__inner">
+        <header data-tv2-reveal>
+          <p class="tv2-kicker">QINGDAO · 04 / 02</p>
+          <h2 id="tv2-qingdao-rocks-title">海把时间，<br>留在礁石之间</h2>
+          <p>潮水退去之后，石缝里留下小片天空。远处的船很慢，浪声却一直在往岸上赶。</p>
+        </header>
+
+        <figure class="tv2-sketch tv2-sketch--landscape" data-tv2-reveal>
+          <img
+            src="/img/travel-v2/qingdao-rocks-sketch.webp"
+            width="1869"
+            height="842"
+            loading="lazy"
+            decoding="async"
+            alt="由青岛礁石海岸实拍照片转换成的海蓝钢笔淡彩简笔画"
+          >
+          <figcaption><span>02</span> 海岸 / 礁石与远船</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="tv2-scene tv2-qingdao-chapter tv2-qingdao-chapter--wake" data-tv2-scene="4" data-snap aria-labelledby="tv2-qingdao-wake-title">
+      <div class="tv2-wrap tv2-qingdao-chapter__grid tv2-qingdao-chapter__grid--reverse">
+        <figure class="tv2-sketch tv2-sketch--portrait tv2-sketch--wake" data-tv2-reveal>
+          <img
+            src="/img/travel-v2/qingdao-wake-sketch.webp"
+            width="842"
+            height="1867"
+            loading="lazy"
+            decoding="async"
+            alt="由青岛船尾浪迹实拍照片转换成的海蓝钢笔淡彩简笔画"
+          >
+          <figcaption><span>03</span> 离岸 / 船尾与海鸟</figcaption>
+        </figure>
+
+        <div class="tv2-qingdao-copy tv2-qingdao-copy--quote" data-tv2-reveal>
+          <p class="tv2-kicker">QINGDAO · 04 / 03</p>
+          <p class="tv2-quote-mark" aria-hidden="true">“</p>
+          <h2 id="tv2-qingdao-wake-title">海边手记</h2>
+          <blockquote>
+            天刚有一点亮，我沿着海岸一直走。没有目的地，也没有一定要拍到的画面。<br><br>
+            远处的城市还没完全醒来。那一刻忽然觉得，自由不是要去多远，而是可以暂时不回答任何问题。
+          </blockquote>
+          <p class="tv2-signature">—— 写在海风最轻的时候</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="next" class="tv2-scene tv2-next" data-tv2-scene="5" data-snap aria-labelledby="tv2-next-title">
+    <div class="tv2-wrap tv2-next__inner">
+      <div class="tv2-next__copy" data-tv2-reveal>
+        <p class="tv2-kicker">NEXT · 05</p>
+        <h2 id="tv2-next-title">下一站，<br><span>未定</span></h2>
+        <p>新的坐标亮起之前，先把走过的地方写完。</p>
+      </div>
+
+      <div class="tv2-next__actions" data-tv2-reveal>
+        <p><strong>01</strong> 个国家</p>
+        <p><strong>14</strong> 座城市</p>
+        <a href="#world">回到世界地图 <span aria-hidden="true">↑</span></a>
+        <a href="#qingdao">再看一次青岛 <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <svg class="tv2-next__route" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true" data-tv2-reveal>
+        <path d="M4 124 C 180 30, 330 142, 494 72 S 820 20, 1010 92 S 1144 80, 1196 28"></path>
+        <circle cx="4" cy="124" r="6"></circle>
+        <circle cx="1196" cy="28" r="6"></circle>
+      </svg>
+    </div>
+  </section>
+</article>
+
+<script data-pjax src="/js/travel-v2-demo.js?v=20260813"></script>
+</div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 很师</span></div><div class="footer_custom_text">路漫漫其修远兮，吾将上下而求索</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="/js/clock.js"></script><script src="/js/essays.js?v=20260517"></script><div id="hs-music-player"></div><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="/js/music-player.js?v=20260507-refresh-resume"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script defer src="/js/home-pet.js?v=20260913-1" data-pet-root="/"></script><!-- hexo injector body_end end --></body></html>

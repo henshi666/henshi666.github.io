@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>吉他旅行地图 Demo | 很师's blog</title><meta name="author" content="很师"><meta name="copyright" content="很师"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="用琴弦、巡演歌单与世界地图记录每一次旅行。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="吉他旅行地图 Demo">
+<meta property="og:url" content="https://henshi666.github.io/travel-guitar-demo/index.html">
+<meta property="og:site_name" content="很师&#39;s blog">
+<meta property="og:description" content="用琴弦、巡演歌单与世界地图记录每一次旅行。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://henshi666.github.io/img/headImage.jpg">
+<meta property="article:published_time" content="2026-08-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-02T10:10:08.059Z">
+<meta property="article:author" content="很师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://henshi666.github.io/img/headImage.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://henshi666.github.io/travel-guitar-demo/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '吉他旅行地图 Demo',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/css/home-pet.css?v=20260913-1"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/banner.webp);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/headImage.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-feather-alt"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tao/"><i class="fa-fw fas fa-yin-yang"></i><span> 道德经</span></a></div><div class="menus_item"><a class="site-page" href="/travel/"><i class="fa-fw fas fa-map-marked-alt"></i><span> 旅行</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div></div></div><div class="page type-travel" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">很师's blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-feather-alt"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tao/"><i class="fa-fw fas fa-yin-yang"></i><span> 道德经</span></a></div><div class="menus_item"><a class="site-page" href="/travel/"><i class="fa-fw fas fa-map-marked-alt"></i><span> 旅行</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">吉他旅行地图 Demo</h1></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="page-title">吉他旅行地图 Demo</div><div class="container" id="article-container">
+<link rel="stylesheet" href="/css/travel-guitar-demo.css">
+
+<div id="guitar-travel-demo" class="gtd-page">
+  <section class="gtd-hero" data-gtd-hero>
+    <div class="gtd-hero__lights" aria-hidden="true"></div>
+    <div class="gtd-hero__grid">
+      <div class="gtd-hero__copy gtd-reveal">
+        <div class="gtd-label-row">
+          <span class="gtd-kicker">WORLD TOUR · 2026</span>
+          <span class="gtd-live-dot">INTERACTIVE DEMO</span>
+        </div>
+        <h1>把旅程，<br><em>弹成一首歌。</em></h1>
+        <p class="gtd-hero__lead">地图是琴谱，城市是音符。每到一个地方，就把照片和当时的感受收进这张旅行专辑。</p>
+        <div class="gtd-hero__actions">
+          <button class="gtd-button gtd-button--primary" type="button" data-gtd-chord>
+            <span class="gtd-button__pick" aria-hidden="true"></span>
+            拨一下听听
+          </button>
+          <a class="gtd-button gtd-button--ghost" href="#gtd-tour-map">查看巡演地图 <span aria-hidden="true">↓</span></a>
+        </div>
+        <dl class="gtd-hero__stats" aria-label="旅行统计">
+          <div><dt>COUNTRIES</dt><dd>01</dd></div>
+          <div><dt>CITIES</dt><dd>14</dd></div>
+          <div><dt>MEMORIES</dt><dd>∞</dd></div>
+        </dl>
+      </div>
+
+      <div class="gtd-guitar-stage gtd-reveal" aria-label="可以拨动的六根吉他琴弦">
+        <div class="gtd-guitar" aria-hidden="true">
+          <div class="gtd-guitar__body">
+            <span class="gtd-guitar__soundhole"></span>
+            <span class="gtd-guitar__pickguard"></span>
+            <span class="gtd-guitar__bridge"></span>
+          </div>
+          <div class="gtd-guitar__neck"></div>
+          <div class="gtd-guitar__head"></div>
+        </div>
+
+        <div class="gtd-strings" data-gtd-strings>
+          <button class="gtd-string" style="--string-y:-35px;--string-weight:2.2px" type="button" data-gtd-string="82.41" aria-label="拨动低音 E 弦"><span>E</span></button>
+          <button class="gtd-string" style="--string-y:-21px;--string-weight:1.9px" type="button" data-gtd-string="110" aria-label="拨动 A 弦"><span>A</span></button>
+          <button class="gtd-string" style="--string-y:-7px;--string-weight:1.6px" type="button" data-gtd-string="146.83" aria-label="拨动 D 弦"><span>D</span></button>
+          <button class="gtd-string" style="--string-y:7px;--string-weight:1.3px" type="button" data-gtd-string="196" aria-label="拨动 G 弦"><span>G</span></button>
+          <button class="gtd-string" style="--string-y:21px;--string-weight:1px" type="button" data-gtd-string="246.94" aria-label="拨动 B 弦"><span>B</span></button>
+          <button class="gtd-string" style="--string-y:35px;--string-weight:.8px" type="button" data-gtd-string="329.63" aria-label="拨动高音 E 弦"><span>e</span></button>
+        </div>
+
+        <div class="gtd-stage-card">
+          <span><i aria-hidden="true"></i> NOW PLAYING</span>
+          <strong>Roads &amp; Memories</strong>
+          <button type="button" data-gtd-sound aria-pressed="false">声音：关</button>
+        </div>
+      </div>
+    </div>
+    <div class="gtd-hero__marquee" aria-hidden="true">
+      <span>HARBIN · CHANGCHUN · SHENYANG · DALIAN · BEIJING · QINGDAO · DALÍ · LIJIANG · KUNMING · </span>
+      <span>HARBIN · CHANGCHUN · SHENYANG · DALIAN · BEIJING · QINGDAO · DALÍ · LIJIANG · KUNMING · </span>
+    </div>
+  </section>
+
+  <section class="gtd-section gtd-map-section" id="gtd-tour-map" aria-labelledby="gtd-map-title">
+    <header class="gtd-section__heading gtd-reveal">
+      <div>
+        <span class="gtd-kicker gtd-kicker--dark">SIDE A · TOUR MAP</span>
+        <h2 id="gtd-map-title">旅行巡演地图</h2>
+      </div>
+      <p>发光的拨片代表已经抵达的国家。点击中国，进入城市旅行记录。</p>
+    </header>
+
+    <div class="gtd-map-shell gtd-reveal" data-gtd-map-root>
+      <div class="gtd-map-stage" data-gtd-map-stage>
+        <canvas id="gtd-world-map" role="img" aria-label="世界旅行地图，目前点亮中国">你的浏览器不支持地图画布。</canvas>
+        <div class="gtd-map-grid" aria-hidden="true"></div>
+        <div class="gtd-map-strings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <a class="gtd-map-marker" href="/travel/cn/" data-gtd-lon="104.2" data-gtd-lat="35.9" aria-label="进入中国旅行记录，共十四座城市">
+          <span class="gtd-map-marker__pick" aria-hidden="true"></span>
+          <span class="gtd-map-marker__card">
+            <small>TOUR STOP 01</small>
+            <strong>中国</strong>
+            <em>14 座城市 · 查看记录 →</em>
+          </span>
+        </a>
+        <p class="gtd-map-status" data-gtd-map-status>正在调音，地图马上出现……</p>
+      </div>
+
+      <aside class="gtd-album-card" aria-label="中国旅行专辑信息">
+        <div class="gtd-album-card__cover" aria-hidden="true">
+          <span>01</span>
+          <strong>CHINA<br>SESSIONS</strong>
+          <i></i>
+        </div>
+        <div class="gtd-album-card__meta">
+          <span>NOW TOURING</span>
+          <h3>中国 · 城市现场</h3>
+          <p>从北国冰雪到云南山风，十四个城市已经为照片与手记留好位置。</p>
+          <a href="/travel/cn/">打开这张旅行专辑 <span aria-hidden="true">↗</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="gtd-section gtd-tracks-section" aria-labelledby="gtd-tracks-title">
+    <header class="gtd-section__heading gtd-reveal">
+      <div>
+        <span class="gtd-kicker gtd-kicker--dark">SIDE B · CITY SETLIST</span>
+        <h2 id="gtd-tracks-title">城市曲目</h2>
+      </div>
+      <p>点一座城市，就像在专辑里切换一首歌。照片和文字以后可以逐首补进来。</p>
+    </header>
+
+    <div class="gtd-tracks-layout gtd-reveal">
+      <div class="gtd-track-list" role="list" aria-label="去过的十四座城市">
+        <button class="gtd-track is-active" type="button" role="listitem" data-city="哈尔滨" data-region="东北" data-track="01"><span>01</span><strong>哈尔滨</strong><em>HARBIN</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="长春" data-region="东北" data-track="02"><span>02</span><strong>长春</strong><em>CHANGCHUN</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="沈阳" data-region="东北" data-track="03"><span>03</span><strong>沈阳</strong><em>SHENYANG</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="大连" data-region="东北" data-track="04"><span>04</span><strong>大连</strong><em>DALIAN</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="石家庄" data-region="华北" data-track="05"><span>05</span><strong>石家庄</strong><em>SHIJIAZHUANG</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="唐山" data-region="华北" data-track="06"><span>06</span><strong>唐山</strong><em>TANGSHAN</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="青岛" data-region="山东半岛" data-track="07"><span>07</span><strong>青岛</strong><em>QINGDAO</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="北京" data-region="华北" data-track="08"><span>08</span><strong>北京</strong><em>BEIJING</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="天津" data-region="华北" data-track="09"><span>09</span><strong>天津</strong><em>TIANJIN</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="洛阳" data-region="中原" data-track="10"><span>10</span><strong>洛阳</strong><em>LUOYANG</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="郑州" data-region="中原" data-track="11"><span>11</span><strong>郑州</strong><em>ZHENGZHOU</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="大理" data-region="云南" data-track="12"><span>12</span><strong>大理</strong><em>DALI</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="丽江" data-region="云南" data-track="13"><span>13</span><strong>丽江</strong><em>LIJIANG</em><i aria-hidden="true">▶</i></button>
+        <button class="gtd-track" type="button" role="listitem" data-city="昆明" data-region="云南" data-track="14"><span>14</span><strong>昆明</strong><em>KUNMING</em><i aria-hidden="true">▶</i></button>
+      </div>
+
+      <article class="gtd-track-detail" data-gtd-track-detail aria-live="polite">
+        <div class="gtd-track-detail__top">
+          <span><i aria-hidden="true"></i> NOW PLAYING</span>
+          <em data-gtd-track-index>01 / 14</em>
+        </div>
+        <div class="gtd-track-detail__art" aria-hidden="true">
+          <div class="gtd-vinyl"><span></span></div>
+          <div class="gtd-photo-slot">PHOTO<br>SLOT</div>
+        </div>
+        <span class="gtd-track-detail__region" data-gtd-track-region>东北</span>
+        <h3 data-gtd-track-city>哈尔滨</h3>
+        <p data-gtd-track-copy>这座城市的照片、日期和旅行感受已经留好位置。上传内容后，它会变成专属的一页旅行手记。</p>
+        <div class="gtd-track-detail__progress"><i aria-hidden="true"></i></div>
+        <small>等待加入照片与文字 · READY FOR YOUR STORY</small>
+      </article>
+    </div>
+  </section>
+
+  <footer class="gtd-footer">
+    <span>GUITAR TRAVEL LOG · CONCEPT 01</span>
+    <p>这是独立预览，不会覆盖当前旅行页面。</p>
+    <a href="/travel/">返回现有旅行地图</a>
+  </footer>
+</div>
+
+<script src="/js/travel-guitar-demo.js"></script>
+</div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2026 By 很师</span></div><div class="footer_custom_text">路漫漫其修远兮，吾将上下而求索</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script src="/js/clock.js"></script><script src="/js/essays.js?v=20260517"></script><div id="hs-music-player"></div><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="/js/music-player.js?v=20260507-refresh-resume"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script defer src="/js/home-pet.js?v=20260913-1" data-pet-root="/"></script><!-- hexo injector body_end end --></body></html>

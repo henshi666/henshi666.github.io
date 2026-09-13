@@ -1,0 +1,82 @@
+#hs-home-pet {
+  position: absolute;
+  z-index: 2;
+  right: clamp(20px, 5vw, 80px);
+  bottom: 24px;
+  width: clamp(188px, 19vw, 260px);
+  aspect-ratio: 2 / 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 28px;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease;
+}
+
+#hs-home-pet.is-ready {
+  opacity: 1;
+  visibility: visible;
+}
+
+#hs-home-pet::before {
+  position: absolute;
+  z-index: -1;
+  right: 6%;
+  bottom: 3%;
+  left: 5%;
+  height: 10%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgb(10 16 22 / 30%), transparent 72%);
+  filter: blur(3px);
+  content: '';
+  pointer-events: none;
+}
+
+#hs-home-pet > img,
+#hs-home-pet > canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+#hs-home-pet > canvas {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+
+#hs-home-pet.has-frames > canvas { visibility: visible; }
+#hs-home-pet.has-frames > img { visibility: hidden; }
+
+#hs-home-pet:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 90%);
+  outline-offset: 5px;
+}
+
+@media (max-width: 600px) {
+  #hs-home-pet {
+    right: 16px;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    width: clamp(116px, 31vw, 140px);
+  }
+}
+
+@media (max-height: 500px) {
+  #hs-home-pet {
+    bottom: 18px;
+    width: min(160px, 38vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hs-home-pet { transition: none; }
+}

@@ -1,8 +1,53 @@
 (function () {
+  const INSTANCE_KEY = '__travelPreviewInstance'
   const WORLD_MAP_URL = '/travel/data/world-land.geojson'
   const CHINA_MAP_URL = '/travel/data/china-provinces.geojson'
   const CHINA_CITIES_URL = '/travel/data/visited-cities.json'
   const CHINA_MAP_MIN_LATITUDE = 17.5
+
+  const COLOR_SEA = '14, 118, 152'
+  const COLOR_BRIGHT = '37, 168, 196'
+  const COLOR_SAND = '226, 169, 95'
+  const COLOR_FOAM = '255, 255, 255'
+
+  if (window[INSTANCE_KEY] && typeof window[INSTANCE_KEY].destroy === 'function') {
+    window[INSTANCE_KEY].destroy()
+  }
+
+  let destroyed = false
+  const cleanupTasks = []
+
+  function registerCleanup (task) {
+    if (typeof task === 'function') cleanupTasks.push(task)
+  }
+
+  function destroyTravelPage () {
+    if (destroyed) return
+    destroyed = true
+    while (cleanupTasks.length) {
+      try {
+        cleanupTasks.pop()()
+      } catch (_) {}
+    }
+    document.documentElement.classList.remove('hs-travel-page', 'hs-travel-map-landing')
+  }
+
+  window[INSTANCE_KEY] = { destroy: destroyTravelPage }
+
+  function getMapPalette (root) {
+    const styles = window.getComputedStyle(root)
+    const value = (name, fallback) => styles.getPropertyValue(name).trim() || fallback
+
+    return {
+      sea: value('--travel-map-sea', COLOR_SEA),
+      bright: value('--travel-map-bright', COLOR_BRIGHT),
+      land: value('--travel-map-land', COLOR_FOAM)
+    }
+  }
+
+  function prefersReducedMotion () {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  }
 
   function equalEarthProject (longitude, latitude) {
     const radians = Math.PI / 180
@@ -72,6 +117,7 @@
     const height = Math.max(1, Math.round(rectangle.height))
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5)
     const context = canvas.getContext('2d')
+    const palette = getMapPalette(mapRoot)
     const bounds = mapData.__travelWorldBounds || getMapBounds(mapData.features)
     mapData.__travelWorldBounds = bounds
     const horizontalPadding = width * 0.055
@@ -100,21 +146,8 @@
     context.lineJoin = 'round'
     context.lineCap = 'round'
 
-    const oceanGlow = context.createRadialGradient(
-      width * 0.62,
-      height * 0.48,
-      0,
-      width * 0.62,
-      height * 0.48,
-      width * 0.52
-    )
-    oceanGlow.addColorStop(0, 'rgba(77, 190, 211, 0.06)')
-    oceanGlow.addColorStop(1, 'rgba(77, 190, 211, 0)')
-    context.fillStyle = oceanGlow
-    context.fillRect(0, 0, width, height)
-
-    context.fillStyle = 'rgba(211, 237, 241, 0.24)'
-    context.strokeStyle = 'rgba(214, 243, 247, 0.32)'
+    context.fillStyle = `rgba(${palette.sea}, 0.13)`
+    context.strokeStyle = `rgba(${palette.sea}, 0.38)`
     context.lineWidth = 0.7
 
     mapData.features.forEach(feature => {
@@ -167,27 +200,33 @@
         return response.json()
       })
       .then(mapData => {
-        if (!document.documentElement.contains(mapRoot)) return
+        if (destroyed || !document.documentElement.contains(mapRoot)) return
 
         let resizeFrame
         const draw = () => {
           window.cancelAnimationFrame(resizeFrame)
           resizeFrame = window.requestAnimationFrame(() => renderWorldMap(mapRoot, mapData))
         }
+        mapRoot.__travelRedraw = draw
+        registerCleanup(() => { mapRoot.__travelRedraw = null })
 
         draw()
 
         if ('ResizeObserver' in window) {
           const resizeObserver = new ResizeObserver(draw)
           resizeObserver.observe(mapRoot.querySelector('#travel-world-map'))
+          registerCleanup(() => resizeObserver.disconnect())
         } else {
           window.addEventListener('resize', draw, { passive: true })
+          registerCleanup(() => window.removeEventListener('resize', draw))
         }
+        registerCleanup(() => window.cancelAnimationFrame(resizeFrame))
       })
       .catch(() => {
+        if (destroyed || !document.documentElement.contains(mapRoot)) return
         mapRoot.classList.add('has-error')
         const status = mapRoot.querySelector('[data-map-status]')
-        if (status) status.textContent = '地图暂时没有浮现，可从右侧列表进入。'
+        if (status) status.textContent = '海图暂时没有展开，可从右侧列表进入。'
       })
   }
 
@@ -240,6 +279,13 @@
     context.stroke()
   }
 
+  function projectChinaPoint (coordinate, projection) {
+    return [
+      projection.offsetX + ((coordinate[0] - projection.bounds.minX) * projection.scale),
+      projection.offsetY + ((projection.bounds.maxY - coordinate[1]) * projection.scale)
+    ]
+  }
+
   function renderChinaMap (mapRoot, mapData, cities, activeProvinceCode) {
     const canvas = mapRoot.querySelector('#travel-china-map')
     const markerLayer = mapRoot.querySelector('[data-china-marker-layer]')
@@ -247,6 +293,7 @@
 
     const context = canvas.getContext('2d')
     if (!context) return false
+    const palette = getMapPalette(mapRoot)
 
     const features = mapData.__travelProvinceFeatures || mapData.features.filter(feature => {
       return feature.properties && feature.properties.level === 'province'
@@ -271,12 +318,12 @@
     const offsetX = (width - mapWidth) / 2
     const offsetY = (height - mapHeight) / 2
     const visitedProvinceCodes = new Set(cities.map(city => city.provinceCode))
+    const projection = { offsetX, offsetY, scale, bounds, width, height }
+
+    mapRoot.__chinaProjection = projection
 
     function toCanvasPoint (coordinate) {
-      return [
-        offsetX + ((coordinate[0] - bounds.minX) * scale),
-        offsetY + ((bounds.maxY - coordinate[1]) * scale)
-      ]
+      return projectChinaPoint(coordinate, projection)
     }
 
     canvas.width = Math.round(width * pixelRatio)
@@ -286,22 +333,9 @@
     context.lineJoin = 'round'
     context.lineCap = 'round'
 
-    const mapGlow = context.createRadialGradient(
-      width * 0.68,
-      height * 0.58,
-      0,
-      width * 0.68,
-      height * 0.58,
-      width * 0.58
-    )
-    mapGlow.addColorStop(0, 'rgba(71, 190, 202, 0.08)')
-    mapGlow.addColorStop(1, 'rgba(71, 190, 202, 0)')
-    context.fillStyle = mapGlow
-    context.fillRect(0, 0, width, height)
-
     context.save()
     context.beginPath()
-    context.rect(offsetX, offsetY, mapWidth, mapHeight)
+    context.rect(offsetX - 2, offsetY - 2, mapWidth + 4, mapHeight + 4)
     context.clip()
 
     features.forEach(feature => {
@@ -309,9 +343,9 @@
       if (provinceCode === activeProvinceCode) return
 
       context.fillStyle = visitedProvinceCodes.has(provinceCode)
-        ? 'rgba(159, 221, 226, 0.24)'
-        : 'rgba(206, 236, 239, 0.14)'
-      context.strokeStyle = 'rgba(211, 242, 244, 0.34)'
+        ? `rgba(${palette.bright}, 0.2)`
+        : `rgba(${palette.sea}, 0.07)`
+      context.strokeStyle = `rgba(${palette.sea}, 0.3)`
       context.lineWidth = 0.75
       drawChinaFeature(context, feature, toCanvasPoint)
     })
@@ -322,11 +356,11 @@
 
     if (activeFeature) {
       context.save()
-      context.fillStyle = 'rgba(76, 199, 207, 0.52)'
-      context.strokeStyle = 'rgba(207, 249, 247, 0.92)'
-      context.lineWidth = 1.35
-      context.shadowColor = 'rgba(75, 212, 218, 0.44)'
-      context.shadowBlur = 13
+      context.fillStyle = `rgba(${palette.bright}, 0.45)`
+      context.strokeStyle = 'rgba(255, 255, 255, 0.95)'
+      context.lineWidth = 1.3
+      context.shadowColor = `rgba(${palette.bright}, 0.55)`
+      context.shadowBlur = 14
       drawChinaFeature(context, activeFeature, toCanvasPoint)
       context.restore()
     }
@@ -352,6 +386,67 @@
     )
     mapRoot.classList.add('is-ready')
     return true
+  }
+
+  /* A quiet, static route keeps the map readable without a permanent animation. */
+  function initializeChinaRoute (mapRoot, cities) {
+    const routeCanvas = mapRoot.querySelector('[data-china-route-canvas]')
+    if (!routeCanvas || cities.length < 2) return
+
+    const context = routeCanvas.getContext('2d')
+    if (!context) return
+
+    let frame
+
+    function drawRoute () {
+      const projection = mapRoot.__chinaProjection
+      if (!projection) return false
+      const palette = getMapPalette(mapRoot)
+
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5)
+      const width = projection.width
+      const height = projection.height
+
+      if (routeCanvas.width !== Math.round(width * pixelRatio) ||
+          routeCanvas.height !== Math.round(height * pixelRatio)) {
+        routeCanvas.width = Math.round(width * pixelRatio)
+        routeCanvas.height = Math.round(height * pixelRatio)
+      }
+
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
+      context.clearRect(0, 0, width, height)
+      context.lineJoin = 'round'
+      context.lineCap = 'round'
+
+      const points = cities.map(city => projectChinaPoint([city.longitude, city.latitude], projection))
+
+      context.beginPath()
+      points.forEach((point, index) => {
+        if (index === 0) {
+          context.moveTo(point[0], point[1])
+        } else {
+          context.lineTo(point[0], point[1])
+        }
+      })
+      context.strokeStyle = `rgba(${palette.sea}, 0.48)`
+      context.lineWidth = 1.3
+      context.setLineDash([6, 9])
+      context.lineDashOffset = 0
+      context.stroke()
+      context.setLineDash([])
+
+      return true
+    }
+
+    mapRoot.__travelRouteRedraw = drawRoute
+    registerCleanup(() => { mapRoot.__travelRouteRedraw = null })
+
+    const waitForProjection = () => {
+      if (destroyed || !document.documentElement.contains(routeCanvas)) return
+      if (!drawRoute()) frame = window.requestAnimationFrame(waitForProjection)
+    }
+    waitForProjection()
+    registerCleanup(() => window.cancelAnimationFrame(frame))
   }
 
   function readChinaCityCopy (mapRoot) {
@@ -391,7 +486,7 @@
         labelOffsetX: Number(city.labelOffsetX) || 0,
         labelOffsetY: Number(city.labelOffsetY) || 0,
         href: typeof city.href === 'string' ? city.href.trim() : '',
-        copy: copyByCity.get(id) || `${name}的坐标已经点亮，旅行记录还在慢慢整理。`,
+        copy: copyByCity.get(id) || `${name}的手记还在整理，坐标先亮着。`,
         index
       }
     }).filter(Boolean)
@@ -481,6 +576,49 @@
     return Array.from(mapRoot.querySelectorAll('[data-city-select][data-city-id]'))
   }
 
+  function createChinaJournalRow (city, total) {
+    const item = document.createElement('li')
+    const button = document.createElement('button')
+    const index = document.createElement('span')
+    const cityCell = document.createElement('span')
+    const cityName = document.createElement('strong')
+    const cityMeta = document.createElement('em')
+    const note = document.createElement('span')
+    const coordinate = document.createElement('span')
+    const arrow = document.createElement('span')
+
+    button.className = 'log-journal__row'
+    button.type = 'button'
+    button.dataset.journalCity = city.id
+    button.setAttribute(
+      'aria-label',
+      `${city.name}，${city.province}，第${city.index + 1}个，共${total}个，在地图上查看`
+    )
+
+    index.className = 'log-journal__index'
+    index.textContent = String(city.index + 1).padStart(2, '0')
+
+    cityCell.className = 'log-journal__city'
+    cityName.textContent = city.name
+    cityMeta.textContent = city.region ? `${city.province} · ${city.region}` : city.province
+    cityCell.append(cityName, cityMeta)
+
+    note.className = 'log-journal__note'
+    note.textContent = city.copy
+
+    coordinate.className = 'log-journal__coord'
+    coordinate.textContent = `${city.latitude.toFixed(2)}° N · ${city.longitude.toFixed(2)}° E`
+
+    arrow.className = 'log-journal__go'
+    arrow.setAttribute('aria-hidden', 'true')
+    arrow.textContent = '→'
+
+    button.append(index, cityCell, note, coordinate, arrow)
+    item.append(button)
+
+    return item
+  }
+
   function updateChinaCityDetail (mapRoot, cities, activeCity) {
     const detail = mapRoot.querySelector('[data-city-detail]')
     if (!detail) return
@@ -520,8 +658,8 @@
       link.removeAttribute('href')
       link.classList.add('is-disabled')
       link.setAttribute('aria-disabled', 'true')
-      link.setAttribute('aria-label', `${activeCity.name}旅行记录待补充`)
-      link.textContent = '旅行记录待补充'
+      link.setAttribute('aria-label', `${activeCity.name}的手记还在整理`)
+      link.textContent = '手记整理中'
     }
   }
 
@@ -569,7 +707,7 @@
       })
     ])
       .then(([mapData, cityData]) => {
-        if (!document.documentElement.contains(mapRoot)) return
+        if (destroyed || !document.documentElement.contains(mapRoot)) return
         if (!mapData || !Array.isArray(mapData.features)) {
           throw new Error('Invalid China map data')
         }
@@ -580,6 +718,7 @@
         const controls = buildChinaCityControls(mapRoot, cities)
         if (!controls.length) throw new Error('China city controls unavailable')
 
+        let journalRows = []
         let activeProvinceCode = ''
         let resizeFrame
         let resizeObserver
@@ -595,9 +734,13 @@
 
             if (!renderChinaMap(mapRoot, mapData, cities, activeProvinceCode)) {
               showChinaMapError(mapRoot)
+            } else if (typeof mapRoot.__travelRouteRedraw === 'function') {
+              mapRoot.__travelRouteRedraw()
             }
           })
         }
+        mapRoot.__travelRedraw = draw
+        registerCleanup(() => { mapRoot.__travelRedraw = null })
 
         const selectCity = cityId => {
           const activeCity = cities.find(city => city.id === cityId)
@@ -619,6 +762,10 @@
             control.setAttribute('aria-pressed', String(isActive))
           })
 
+          journalRows.forEach(row => {
+            row.classList.toggle('is-active', row.dataset.journalCity === activeCity.id)
+          })
+
           updateChinaCityDetail(mapRoot, cities, activeCity)
           draw()
         }
@@ -627,7 +774,24 @@
           control.addEventListener('click', () => selectCity(control.dataset.cityId))
         })
 
+        const journal = document.querySelector('[data-china-journal]')
+        if (journal) {
+          const fragment = document.createDocumentFragment()
+          cities.forEach(city => fragment.append(createChinaJournalRow(city, cities.length)))
+          journal.replaceChildren(fragment)
+          journalRows = Array.from(journal.querySelectorAll('[data-journal-city]'))
+
+          journalRows.forEach(row => {
+            row.addEventListener('click', () => {
+              selectCity(row.dataset.journalCity)
+              const mapCard = mapRoot.querySelector('.china-atlas__map-card')
+              if (mapCard) mapCard.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            })
+          })
+        }
+
         selectCity(cities[0].id)
+        initializeChinaRoute(mapRoot, cities)
         mapRoot.classList.remove('has-error')
         mapRoot.setAttribute('aria-busy', 'false')
         if (status) status.textContent = `中国旅行地图已加载，可选择${cities.length}座城市。`
@@ -635,86 +799,250 @@
         if ('ResizeObserver' in window) {
           resizeObserver = new ResizeObserver(draw)
           resizeObserver.observe(canvas)
+          registerCleanup(() => resizeObserver.disconnect())
         } else {
           window.addEventListener('resize', draw, { passive: true })
+          registerCleanup(() => window.removeEventListener('resize', draw))
         }
+        registerCleanup(() => window.cancelAnimationFrame(resizeFrame))
       })
-      .catch(() => showChinaMapError(mapRoot))
+      .catch(() => {
+        if (!destroyed && document.documentElement.contains(mapRoot)) showChinaMapError(mapRoot)
+      })
   }
 
   function initializeTravelCounters (root) {
     const counters = Array.from(root.querySelectorAll('[data-travel-count]'))
     if (!counters.length) return
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
     const setCounterValue = (counter, value) => {
       const padding = Math.max(0, Number(counter.dataset.travelCountPad) || 0)
       counter.textContent = String(value).padStart(padding, '0')
     }
 
-    const animateCounter = counter => {
-      if (counter.dataset.countReady === 'true') return
-
+    counters.forEach(counter => {
       const target = Math.max(0, Number(counter.dataset.travelCount) || 0)
       counter.dataset.countReady = 'true'
+      setCounterValue(counter, target)
+    })
+  }
+
+  /* Compass needle follows the pointer inside the hero, then sways idly. */
+  function initializeCompass (root) {
+    if (prefersReducedMotion()) return
+
+    root.querySelectorAll('[data-compass]').forEach(compass => {
+      if (compass.dataset.compassReady === 'true') return
+
+      const needle = compass.querySelector('[data-compass-needle]')
+      const hero = compass.closest('[data-hero]')
+      if (!needle || !hero) return
+
+      compass.dataset.compassReady = 'true'
+      compass.classList.add('is-idle')
+
+      let idleTimer
+
+      hero.addEventListener('pointermove', event => {
+        if (event.pointerType && event.pointerType !== 'mouse') return
+
+        const rectangle = compass.getBoundingClientRect()
+        if (!rectangle.width) return
+
+        const centerX = rectangle.left + (rectangle.width / 2)
+        const centerY = rectangle.top + (rectangle.height / 2)
+        const angle = Math.atan2(event.clientX - centerX, centerY - event.clientY) * (180 / Math.PI)
+
+        compass.classList.remove('is-idle')
+        needle.style.transform = `rotate(${angle.toFixed(1)}deg)`
+
+        window.clearTimeout(idleTimer)
+        idleTimer = window.setTimeout(() => {
+          needle.style.transform = ''
+          compass.classList.add('is-idle')
+        }, 2600)
+      })
+    })
+  }
+
+  /* Drifting light specks in the hero, like plankton in dark water. */
+  function initializeHeroParticles (root) {
+    const reducedMotion = prefersReducedMotion()
+
+    root.querySelectorAll('[data-log-particles]').forEach(canvas => {
+      if (canvas.dataset.particlesReady === 'true') return
+      canvas.dataset.particlesReady = 'true'
+
+      const context = canvas.getContext('2d')
+      if (!context) return
+
+      let width = 0
+      let height = 0
+      let ratio = 1
+      let particles = []
+      let running = false
+      let frame
+
+      function createParticle (fromEdge) {
+        return {
+          x: Math.random() * width,
+          y: fromEdge ? height + 6 : Math.random() * height,
+          radius: 0.6 + (Math.random() * 1.2),
+          driftX: 0.02 + (Math.random() * 0.09),
+          driftY: -(0.015 + (Math.random() * 0.05)),
+          phase: Math.random() * Math.PI * 2,
+          amber: Math.random() < 0.22
+        }
+      }
+
+      const resize = () => {
+        const rectangle = canvas.getBoundingClientRect()
+        width = Math.max(1, Math.round(rectangle.width))
+        height = Math.max(1, Math.round(rectangle.height))
+        ratio = Math.min(window.devicePixelRatio || 1, 1.5)
+        canvas.width = Math.round(width * ratio)
+        canvas.height = Math.round(height * ratio)
+
+        const count = Math.min(64, Math.max(20, Math.round((width * height) / 26000)))
+        if (particles.length !== count) {
+          particles = Array.from({ length: count }, () => createParticle(false))
+        }
+      }
+
+      const drawFrame = time => {
+        context.setTransform(ratio, 0, 0, ratio, 0, 0)
+        context.clearRect(0, 0, width, height)
+
+        particles.forEach(particle => {
+          if (!reducedMotion) {
+            particle.x += particle.driftX
+            particle.y += particle.driftY
+
+            if (particle.y < -8 || particle.x > width + 8) {
+              Object.assign(particle, createParticle(true))
+            }
+          }
+
+          const twinkle = 0.22 + (0.3 * ((1 + Math.sin(particle.phase + (time * 0.0011))) / 2))
+          context.beginPath()
+          context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
+          context.fillStyle = particle.amber
+            ? `rgba(${COLOR_SAND}, ${twinkle.toFixed(3)})`
+            : `rgba(${COLOR_FOAM}, ${(twinkle * 0.9).toFixed(3)})`
+          context.fill()
+        })
+      }
+
+      const loop = time => {
+        if (!running || !document.documentElement.contains(canvas)) return
+        drawFrame(time)
+        frame = window.requestAnimationFrame(loop)
+      }
+
+      const start = () => {
+        if (running) return
+        running = true
+        frame = window.requestAnimationFrame(loop)
+      }
+
+      const stop = () => {
+        running = false
+        window.cancelAnimationFrame(frame)
+      }
+
+      resize()
+
+      if ('ResizeObserver' in window) {
+        const resizeObserver = new ResizeObserver(() => {
+          resize()
+          if (reducedMotion) drawFrame(0)
+        })
+        resizeObserver.observe(canvas)
+      } else {
+        window.addEventListener('resize', resize, { passive: true })
+      }
 
       if (reducedMotion) {
-        setCounterValue(counter, target)
+        drawFrame(0)
         return
       }
 
-      const duration = 1050
-      const startedAt = window.performance.now()
-      setCounterValue(counter, 0)
-
-      const update = now => {
-        if (!document.documentElement.contains(counter)) return
-
-        const progress = Math.min(1, (now - startedAt) / duration)
-        const easedProgress = 1 - Math.pow(1 - progress, 3)
-        setCounterValue(counter, Math.round(target * easedProgress))
-
-        if (progress < 1) window.requestAnimationFrame(update)
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              start()
+            } else {
+              stop()
+            }
+          })
+        }, { threshold: 0.05 })
+        observer.observe(canvas)
+      } else {
+        start()
       }
 
-      window.requestAnimationFrame(update)
-    }
-
-    if (reducedMotion || !('IntersectionObserver' in window)) {
-      counters.forEach(animateCounter)
-      return
-    }
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return
-        animateCounter(entry.target)
-        observer.unobserve(entry.target)
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          stop()
+        } else if (canvas.getBoundingClientRect().height > 0) {
+          start()
+        }
       })
-    }, {
-      rootMargin: '0px 0px -8% 0px',
-      threshold: 0.35
     })
-
-    counters.forEach(counter => observer.observe(counter))
   }
 
-  function initializeTravelRouteTicker (root) {
-    const ticker = root.querySelector('.travel-route-ticker')
-    const toggle = ticker && ticker.querySelector('[data-route-ticker-toggle]')
-    if (!ticker || !toggle || ticker.dataset.tickerReady === 'true') return
+  /* Layered parallax: rose, rhumb lines and grid drift as the pointer moves. */
+  function initializeHeroParallax (root) {
+    if (prefersReducedMotion()) return
 
-    const label = toggle.querySelector('[data-route-ticker-toggle-label]')
-    ticker.dataset.tickerReady = 'true'
+    root.querySelectorAll('[data-hero]').forEach(hero => {
+      if (hero.dataset.parallaxReady === 'true') return
+      hero.dataset.parallaxReady = 'true'
 
-    toggle.addEventListener('click', () => {
-      const isPaused = !ticker.classList.contains('is-paused')
+      hero.addEventListener('pointermove', event => {
+        if (event.pointerType && event.pointerType !== 'mouse') return
 
-      ticker.classList.toggle('is-paused', isPaused)
-      toggle.setAttribute('aria-pressed', String(isPaused))
-      toggle.setAttribute('aria-label', isPaused ? '继续城市航海日志滚动' : '暂停城市航海日志滚动')
-      if (label) label.textContent = isPaused ? '继续' : '暂停'
+        const rectangle = hero.getBoundingClientRect()
+        if (!rectangle.width || !rectangle.height) return
+
+        const normalizedX = ((event.clientX - rectangle.left) / rectangle.width) - 0.5
+        const normalizedY = ((event.clientY - rectangle.top) / rectangle.height) - 0.5
+        hero.style.setProperty('--parallax-x', `${(normalizedX * 22).toFixed(1)}px`)
+        hero.style.setProperty('--parallax-y', `${(normalizedY * 16).toFixed(1)}px`)
+      })
+
+      hero.addEventListener('pointerleave', () => {
+        hero.style.setProperty('--parallax-x', '0px')
+        hero.style.setProperty('--parallax-y', '0px')
+      })
+    })
+  }
+
+  /* Warm searchlight that follows the pointer across the charts. */
+  function initializeChartGlow (root) {
+    root.querySelectorAll('[data-chart-glow]').forEach(shell => {
+      if (shell.dataset.glowReady === 'true') return
+      shell.dataset.glowReady = 'true'
+
+      shell.querySelectorAll('.world-atlas__chart, .china-atlas__map').forEach(area => {
+        area.addEventListener('pointermove', event => {
+          if (event.pointerType && event.pointerType !== 'mouse') return
+
+          const rectangle = area.getBoundingClientRect()
+          if (!rectangle.width || !rectangle.height) return
+
+          const x = ((event.clientX - rectangle.left) / rectangle.width) * 100
+          const y = ((event.clientY - rectangle.top) / rectangle.height) * 100
+          area.style.setProperty('--glow-x', `${x.toFixed(1)}%`)
+          area.style.setProperty('--glow-y', `${y.toFixed(1)}%`)
+          area.classList.add('is-glowing')
+        })
+
+        area.addEventListener('pointerleave', () => {
+          area.classList.remove('is-glowing')
+        })
+      })
     })
   }
 
@@ -732,10 +1060,9 @@
     initializeWorldMap(root)
     initializeChinaMap(root)
     initializeTravelCounters(root)
-    initializeTravelRouteTicker(root)
 
     const revealItems = root.querySelectorAll('.travel-reveal')
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reducedMotion = prefersReducedMotion()
 
     if (reducedMotion || !('IntersectionObserver' in window)) {
       revealItems.forEach(item => item.classList.add('is-visible'))
@@ -752,28 +1079,28 @@
       })
 
       revealItems.forEach(item => observer.observe(item))
+      registerCleanup(() => observer.disconnect())
     }
 
-    root.querySelectorAll('[data-travel-target]').forEach(link => {
-      link.addEventListener('click', () => {
-        const story = document.getElementById(link.dataset.travelTarget)
-        if (!story) return
-
-        root.querySelectorAll('.ocean-place').forEach(place => place.classList.remove('is-active'))
-        root.querySelectorAll('.ocean-story').forEach(item => item.classList.remove('is-highlighted'))
-        link.classList.add('is-active')
-        story.classList.add('is-highlighted')
-
-        window.setTimeout(() => story.classList.remove('is-highlighted'), 1800)
+    if ('MutationObserver' in window) {
+      const themeObserver = new MutationObserver(() => {
+        const worldRoot = root.querySelector('[data-world-map-root]')
+        const chinaRoot = root.querySelector('[data-china-map-root]')
+        if (worldRoot && typeof worldRoot.__travelRedraw === 'function') worldRoot.__travelRedraw()
+        if (chinaRoot && typeof chinaRoot.__travelRedraw === 'function') chinaRoot.__travelRedraw()
       })
-    })
+      themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+      registerCleanup(() => themeObserver.disconnect())
+    }
   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateTravelPage)
+    registerCleanup(() => document.removeEventListener('DOMContentLoaded', updateTravelPage))
   } else {
     updateTravelPage()
   }
 
-  document.addEventListener('pjax:complete', updateTravelPage)
+  document.addEventListener('pjax:send', destroyTravelPage, { once: true })
+  registerCleanup(() => document.removeEventListener('pjax:send', destroyTravelPage))
 })()
